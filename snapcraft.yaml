@@ -13,7 +13,7 @@ description: |
  while you were detached, SSL encryption, DCC proxying, and a plugin
  interface with many plugins supporting other features.
 
-confinement: devmode
+confinement: strict
 apps:
   znc:
     command: znc
