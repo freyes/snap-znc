@@ -1,0 +1,42 @@
+diff --git a/src/Modules.cpp b/src/Modules.cpp
+index 7e41ac8c..93d8d1b1 100644
+--- a/src/Modules.cpp
++++ b/src/Modules.cpp
+@@ -22,6 +22,7 @@
+ #include <znc/WebModules.h>
+ #include <znc/znc.h>
+ #include <dlfcn.h>
++#include <cstdlib>
+ 
+ using std::map;
+ using std::set;
+@@ -1291,7 +1292,7 @@ CModules::ModDirList CModules::GetModDirs() {
+ 	ret.push(std::make_pair(sDir, sDir));
+ 
+ 	// <moduledir> and <datadir> (<prefix>/lib/znc)
+-	ret.push(std::make_pair(_MODDIR_ + CString("/"), _DATADIR_ + CString("/modules/")));
++	ret.push(std::make_pair(CString(getenv("SNAP")) + _MODDIR_ + CString("/"), CString(getenv("SNAP")) + _DATADIR_ + CString("/modules/")));
+ 
+ 	return ret;
+ }
+diff --git a/src/WebModules.cpp b/src/WebModules.cpp
+index a76db823..26f449ef 100644
+--- a/src/WebModules.cpp
++++ b/src/WebModules.cpp
+@@ -21,6 +21,7 @@
+ #include <znc/znc.h>
+ #include <algorithm>
+ #include <sstream>
++#include <cstdlib>
+ 
+ using std::pair;
+ using std::vector;
+@@ -527,7 +528,7 @@ CString CWebSock::GetSkinPath(const CString& sSkinName) {
+ 		sRet = CZNC::Get().GetCurPath() + "/webskins/" + sSkinName;
+ 
+ 		if (!CFile::IsDir(sRet)) {
+-			sRet = CString(_SKINDIR_) + "/" + sSkinName;
++			sRet = CString(getenv("SNAP")) + CString(_SKINDIR_) + "/" + sSkinName;
+ 		}
+ 	}
+ 
