@@ -1,5 +1,5 @@
-name: znc
-version: "1.7-git"
+name: znc-freyes
+version: "1.6.5"
 summary: advanced modular IRC bouncer
 description: |
  znc is an IRC proxy. It runs as a daemon and connects to IRC server,
@@ -22,9 +22,8 @@ apps:
 parts:
   znc:
     plugin: autotools
-    source: https://github.com/freyes/znc
-    source-type: git
-    source-branch: snappy
+    source: https://github.com/znc/znc.git
+    source-tag: znc-1.6.5
     configflags:
       - '--enable-python'
       - '--enable-perl'
@@ -33,3 +32,13 @@ parts:
       - python3-dev
       - libperl-dev
       - swig
+      - pkg-config
+      - cmake
+      - automake
+      - autoconf
+      - libssl-dev
+      - libicu-dev
+      - zlib1g-dev
+    prepare: |
+      #!/bin/bash -ex
+      patch -p1 < ../../../modules-dir-relative-snap-dir.patch
