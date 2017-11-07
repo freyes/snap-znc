@@ -42,3 +42,14 @@ parts:
     prepare: |
       #!/bin/bash -ex
       patch -p1 < ../../../modules-dir-relative-snap-dir.patch
+
+  znc-push:
+    plugin: make
+    source: https://github.com/jreese/znc-push.git
+    after: [znc]
+    build-packages:
+      - ca-certificates
+    build: |
+      #!/bin/bash -ex
+      env PATH="../../../parts/znc/install/usr/bin:$PATH" make
+      cp push.so ../../../stage/usr/share/znc/modules
