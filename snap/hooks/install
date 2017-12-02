@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+# walk the user through the initial setup
+mkdir $SNAP_USER_DATA/.znc
+cp -r $SNAP/configs $SNAP_USER_DATA/.znc/

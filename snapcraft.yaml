@@ -14,9 +14,12 @@ description: |
  interface with many plugins supporting other features.
 
 confinement: strict
+grade: devel
+
 apps:
   znc:
-    command: znc
+    command: znc -f -r
+    daemon: simple
     plugs: [network, network-bind, home]
 
 parts:
@@ -42,6 +45,10 @@ parts:
     prepare: |
       #!/bin/bash -ex
       patch -p1 < ../../../modules-dir-relative-snap-dir.patch
+
+  znc-config:
+    plugin: dump
+    source: ./includes
 
   znc-push:
     plugin: make
