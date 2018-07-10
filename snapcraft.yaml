@@ -1,5 +1,5 @@
 name: znc-arubislander
-version: "1.6.5"
+version: "1.6.5-snap2"
 summary: advanced modular IRC bouncer
 description: |
  znc is an IRC proxy. It runs as a daemon and connects to IRC server,
